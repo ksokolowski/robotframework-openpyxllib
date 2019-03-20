@@ -1,10 +1,8 @@
 #!/usr/bin/env python
-
-
-
 import openpyxl
 
-class  OpenPyxlLibrary:
+
+class OpenPyxlLibrary:
     """
         This test library internally use openpyxl module of python and provides keywords to open, read, write excel files. This library only supports
         xlsx file formats.
@@ -38,7 +36,7 @@ class  OpenPyxlLibrary:
         self.filename = file
         self.wb = openpyxl.load_workbook(self.filename)
 
-    def get_sheet_names(self):
+    def get_sheet_names(self, file):
         """
         Return sheetnames of the workbook
         Example:
@@ -48,12 +46,10 @@ class  OpenPyxlLibrary:
         self.filename = file
         return self.wb.get_sheet_names()
     
-    
     def opensheet_byname(self, sheetname):
         """
         **** Marked for depreciation ****
         """
-        #self.sheet = self.wb.get_sheet_by_name(sheetname)
         self.sheet = self.wb[sheetname]
 
     
@@ -85,28 +81,24 @@ class  OpenPyxlLibrary:
         | Read Cell Data By Coordinates     |  SheetName | Row Number |  Column Number  |
         | Read Cell Data By Coordinates     |  Sheet1 |  1  |  1  |
         """
-        #self.sheet = self.wb.get_sheet_by_name(sheetname)
         self.sheet = self.wb[sheetname]
         self.row = int(row_value)
         self.column = int(column_value)
         varcellValue =  self.sheet.cell(row=self.row, column=self.column).value
         return varcellValue
 
-    
-    def write_data_by_coordinates(self,sheetname,row_value, column_value,varValue):
+    def write_data_by_coordinates(self, sheetname, row_value, column_value, varValue):
         """
         Write the value to a call using its co-ordinates
         Example:
         | Write Data By Coordinates    |  SheetName  | Row Number | Column Number |  Data  |
         | Write Data By Coordinates    | Sheet1 | 1 | 1 |  TestData  |
         """
-        #self.sheet = self.wb.get_sheet_by_name(sheetname)
         self.sheet = self.wb[sheetname]
         self.row = int(row_value)
         self.column = int(column_value)
         self.varValue = varValue
         self.sheet.cell(row=self.row, column=self.column).value = self.varValue
-    
 
     def save_excel(self, file):
         """
@@ -134,5 +126,14 @@ class  OpenPyxlLibrary:
         | Keywords             | Parameters                                       |
         | Add new sheet        | SheetName                                       |
         """
-        self.newsheet = varnewsheetname
-        self.wb.create_sheet(self.newsheet)
+        self.wb.create_sheet(varnewsheetname)
+
+    def create_workbook(self):
+        """
+        Create the new workbook.
+        Arguments:
+        Example:
+        | Keywords             | Parameters                                       |
+        | create workbook      |
+        """
+        self.wb = openpyxl.Workbook()
