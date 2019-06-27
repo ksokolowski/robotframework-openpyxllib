@@ -3,8 +3,9 @@
 
 
 import openpyxl
+import os
 
-class  OpenPyxlLibrary:
+class  OpenPyxlLibrary():
     """
         This test library internally use openpyxl module of python and provides keywords to open, read, write excel files. This library only supports
         xlsx file formats.
@@ -35,10 +36,14 @@ class  OpenPyxlLibrary:
         Example:
         | Open Excel      |  C:\\Python27\\ExcelRobotTest\\ExcelRobotTest.xlsx  |
         """
-        self.filename = file
-        self.wb = openpyxl.load_workbook(self.filename)
+        if os.path.exists(file):
+            self.filename = file
+            self.wb = openpyxl.load_workbook(self.filename)
+        else:
+            print('11111')
+            self.wb = openpyxl.Workbook()
 
-    def get_sheet_names(self):
+    def get_sheet_names(self, file):
         """
         Return sheetnames of the workbook
         Example:
@@ -46,7 +51,7 @@ class  OpenPyxlLibrary:
         | Get sheet names      |                                                     |
         """
         self.filename = file
-        return self.wb.get_sheet_names()
+        return self.wb.sheetnames
     
     
     def opensheet_byname(self, sheetname):
@@ -93,7 +98,7 @@ class  OpenPyxlLibrary:
         return varcellValue
 
     
-    def write_data_by_coordinates(self,sheetname,row_value, column_value,varValue):
+    def write_data_by_coordinates(self,sheetname,column_value,row_value,varValue):
         """
         Write the value to a call using its co-ordinates
         Example:
@@ -136,3 +141,26 @@ class  OpenPyxlLibrary:
         """
         self.newsheet = varnewsheetname
         self.wb.create_sheet(self.newsheet)
+
+    def append_new_data(self,sheetname,data):
+        """
+        append_new_data
+        Arguments:
+        | sheetname        | the sheetname where to be appended     |
+        | data             | the data to be appended
+
+        Example:
+        | Keywords         | Parameters                             |
+        | Add new sheet    | SheetName                              |
+        """
+
+        self.sheet = self.wb[sheetname]
+        self.sheet.append(list(data))
+
+
+#
+if __name__ == "__main__":
+    opxl=OpenPyxlLibrary()
+    opxl.open_excel('test1.xlsx')
+    opxl.get_sheet_names('test1.xlsx')
+    opxl.save_excel('test1.xlsx')

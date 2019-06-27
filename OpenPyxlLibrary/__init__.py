@@ -1,4 +1,4 @@
-from OpenPyxlLibrary import OpenPyxlLibrary
+from .OpenPyxlLibrary import OpenPyxlLibrary
 
 
 class OpenPyxlLibrary(OpenPyxlLibrary):
