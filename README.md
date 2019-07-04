@@ -1,7 +1,8 @@
-# Robotframework-Openpyxllib library
+# Robotframework-Openpyxllib2 library
 
 This Robotframework Openpyxl library that provides keywords to Open, Read, Write and Save XLSX files. 
 This library uses Openpyxl python module to read and write datas in xlsx files.
+openpyxllib2 Library is for python 2.x/3.x
 
 ## Pre-requisities
 - Python 2.x/3.x
