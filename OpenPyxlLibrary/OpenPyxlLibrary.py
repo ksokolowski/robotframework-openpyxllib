@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+'''
+Description: My fork of OpenPyxlLib to support Python3 (should still work with Python 2) and is supports also XLSM files (with VBA scripts)
+
+'''
 
 
 
@@ -38,7 +42,7 @@ class  OpenPyxlLibrary():
         """
         if os.path.exists(file):
             self.filename = file
-            self.wb = openpyxl.load_workbook(self.filename)
+            self.wb = openpyxl.load_workbook(self.filename, read_only=False, keep_vba=True)
         else:
             print('11111')
             self.wb = openpyxl.Workbook()
